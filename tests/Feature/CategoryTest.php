@@ -8,6 +8,7 @@ use Database\Seeders\CategorySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Database\Seeders\ProductSeeder;
 
 use function PHPUnit\Framework\assertEquals;
 
@@ -217,5 +218,19 @@ class CategoryTest extends TestCase
         $category = Category::withoutGlobalScopes([IsActiveScope::class])->find("FOOD");
         self::assertNotNull($category);
 
+    }
+
+    public function testOneToMany()
+    {
+        $this->seed([CategorySeeder::class, ProductSeeder::class]);
+
+        $category = Category::find("FOOD");
+        self::assertNotNull($category);
+
+        // $products = Product::where("category_id", $category->id)->get();
+        $products = $category->products;
+
+        self::assertNotNull($products);
+        self::assertCount(1, $products);
     }
 }
