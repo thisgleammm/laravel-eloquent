@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Scopes\IsActiveScope;
 
 class Category extends Model
 {
@@ -15,6 +16,13 @@ class Category extends Model
     protected $fillable = [
         "id",
         "name",
-        "description"
+        "description",
+        "is_active"
     ];
+
+    protected static function booted(): void
+    {
+        parent::booted();
+        self::addGlobalScope(new IsActiveScope());
+    }
 }
