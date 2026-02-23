@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/Users/thisgleam/.config/herd-lite/bin/php",
+            "args": [
+                "/Users/thisgleam/PersonalWeb/laravel-eloquent/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
